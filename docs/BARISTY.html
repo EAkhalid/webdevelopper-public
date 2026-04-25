@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth transition-colors duration-500" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARISTY | Excellence Locale Établie</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --p-indigo: #4F46E5; --p-purple: #9333EA; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .heading-font { font-family: 'Unbounded', sans-serif; font-weight: 800; }
+        
+        .glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .glass { background: rgba(15, 23, 42, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .gradient-text { background: linear-gradient(135deg, var(--p-indigo), var(--p-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-pattern { background-image: url('data:image/svg+xml,%3Csvg width=\'52\' height=\'26\' viewBox=\'0 0 52 26\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23a1a1aa\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6h-2c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); }
+        .dark .hero-pattern { opacity: 0.05; }
+    </style>
+</head>
+<body class="bg-white dark:bg-slate-900 text-slate-950 dark:text-white antialiased overflow-x-hidden transition-colors duration-300">
+
+    <div class="bg-indigo-600 text-white text-center py-2.5 text-xs font-bold tracking-widest uppercase relative z-50">
+        Aperçu Démo : Prototype Personnalisé pour BARISTY
+    </div>
+
+    <nav class="sticky top-0 z-50 glass h-20 px-6 sm:px-10 flex justify-between items-center" x-data="{ mobileMenu: false }">
+        <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 bg-slate-950 dark:bg-white rounded-2xl flex items-center justify-center text-white dark:text-slate-900 font-black text-xl shadow-lg border-2 border-slate-900 dark:border-slate-200 transition-colors">
+                B
+            </div>
+            <span class="font-extrabold text-2xl tracking-tighter text-slate-950 dark:text-white transition-colors">BARISTY</span>
+        </div>
+        
+        <div class="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-700 dark:text-slate-300">
+            <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Notre Histoire</a>
+            <a href="#video" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Galerie</a>
+            <a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
+            
+            <button @click="darkMode = !darkMode" class="text-xl p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition transform hover:scale-110">
+                <i class="fas" :class="darkMode ? 'fa-sun text-yellow-400' : 'fa-moon text-slate-700'"></i>
+            </button>
+
+            <a href="#claim" class="bg-slate-950 dark:bg-white text-white dark:text-slate-900 px-7 py-3 rounded-full hover:bg-slate-800 dark:hover:bg-slate-200 transition active:scale-95 shadow-xl text-xs font-bold uppercase tracking-wide">Acquérir ce site</a>
+        </div>
+
+        <div class="lg:hidden flex items-center gap-4">
+            <button @click="darkMode = !darkMode" class="text-xl p-2">
+                <i class="fas" :class="darkMode ? 'fa-sun text-yellow-400' : 'fa-moon text-slate-700'"></i>
+            </button>
+            <button @click="mobileMenu = !mobileMenu" class="text-2xl text-slate-950 dark:text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="relative min-h-[90vh] flex items-center justify-center bg-zinc-50 dark:bg-slate-900 hero-pattern border-b border-zinc-100 dark:border-slate-800 overflow-hidden pt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div data-aos="fade-right" data-aos-duration="1200">
+                <span class="inline-flex items-center gap-3 px-5 py-2 mb-8 rounded-full bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-sm font-semibold shadow-inner transition-colors">
+                    <i class="fas fa-check-circle text-amber-500"></i>
+                    Vérifié par la Communauté - /5 Étoiles
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-10 leading-[1] tracking-tighter">
+                    L'Excellence en <span class="gradient-text"></span>.
+                </h1>
+                <p class="text-xl text-slate-700 dark:text-slate-300 mb-12 max-w-2xl leading-relaxed transition-colors">
+                    BARISTY est un pilier de confiance locale, offrant une qualité et un service inégalés depuis des années. Découvrez la différence d'un savoir-faire dédié.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#contact" class="bg-indigo-600 text-white px-12 py-5 rounded-xl font-bold text-lg shadow-2xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center">Nous Contacter</a>
+                    <a href="#about" class="bg-white dark:bg-slate-800 text-slate-950 dark:text-white px-12 py-5 rounded-xl font-semibold text-lg border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 transition text-center">Notre Histoire</a>
+                </div>
+            </div>
+            <div class="relative" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&w=1200" class="rounded-3xl shadow-2xl w-full h-[70vh] object-cover border-4 border-white dark:border-slate-800 transition-colors">
+                <div class="absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-2xl flex items-center gap-4">
+                    <p class="text-6xl font-extrabold gradient-text"></p>
+                    <div>
+                        <p class="font-bold text-slate-950 dark:text-white">Note de Confiance</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Sur Google Maps</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-28 bg-white dark:bg-slate-950 border-b border-zinc-100 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+            <div class="text-center mb-24 max-w-3xl mx-auto" data-aos="flip-up">
+                <span class="font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase text-sm mb-3 inline-block">Nos Fondations</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tighter leading-[1.1]">Valeurs Traditionnelles & <span class="text-indigo-600 dark:text-indigo-400">Expertise Moderne</span></h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">Chez BARISTY, notre histoire est définie par un engagement envers la perfection. Nous avons bâti notre réputation client par client.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="grid grid-cols-2 gap-6" data-aos="fade-right">
+        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&w=1200" class="rounded-2xl h-80 w-full object-cover shadow-lg">
+        <img src="https://images.pexels.com/photos/3183191/pexels-photo-3183191.jpeg?auto=compress&w=800" class="rounded-2xl h-80 w-full object-cover mt-12 shadow-2xl">
+    </div>
+                <div data-aos="fade-left" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-950 dark:text-white">Créé avec Passion</h3>
+                    <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-8">Chaque interaction chez BARISTY est guidée par la précision. Nous ne fournissons pas seulement un service ; nous offrons une expérience mémorable.</p>
+                    <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-10">Forts de notre excellente réputation de  étoiles, nous vous invitons à rejoindre notre communauté qui valorise la vraie qualité.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6 border-t border-zinc-100 dark:border-slate-800 pt-8 mt-10 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-certificate text-indigo-500 text-3xl"></i>
+                            <span class="font-semibold text-slate-900 dark:text-white">Qualité Certifiée</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-heart text-indigo-500 text-3xl"></i>
+                            <span class="font-semibold text-slate-900 dark:text-white">Client au Cœur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="video" class="relative py-28 bg-slate-950 border-t border-slate-900 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-down">
+                <span class="font-bold text-indigo-400 tracking-wider uppercase text-sm mb-3 inline-block">L'Expérience</span>
+                <h2 class="text-white text-4xl md:text-5xl font-extrabold mb-6 leading-tight tracking-tight">Immersion Atmosphérique</h2>
+                <p class="text-slate-400 max-w-xl mx-auto">Visualisez le professionnalisme de BARISTY en mouvement.</p>
+            </div>
+            
+            <div class="relative rounded-3xl overflow-hidden shadow-3xl shadow-black/60 aspect-[16/9] border-4 border-slate-800 bg-slate-900">
+                <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover" poster="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&w=1200">
+                    <source src="https://player.vimeo.com/external/371434639.sd.mp4?s=346513361f10901e7d806509a25b2a096c426210&profile_id=139" type="video/mp4">
+                    votre navigateur ne supporte pas la vidéo.
+                </video>
+                <div class="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-28 bg-zinc-50 dark:bg-slate-900 border-b border-zinc-100 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 grid md:grid-cols-2 gap-16">
+            
+            <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm transition-colors" data-aos="fade-right">
+                <h3 class="text-3xl font-extrabold mb-4 tracking-tight dark:text-white">Demande d'Infos</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-10">Contactez-nous pour réserver ou pour plus de détails sur nos services.</p>
+                
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">Nom Complet</label>
+                        <input type="text" placeholder="Ex: Ahmed Alaoui" class="w-full px-5 py-3.5 rounded-xl border border-slate-100 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">Téléphone</label>
+                        <input type="tel" placeholder="06..." class="w-full px-5 py-3.5 rounded-xl border border-slate-100 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-slate-800 dark:text-slate-200">Message</label>
+                        <textarea rows="3" placeholder="Je suis intéressé par..." class="w-full px-5 py-3.5 rounded-xl border border-slate-100 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none transition"></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-slate-950 dark:bg-indigo-600 text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-slate-800 dark:hover:bg-indigo-700 transition shadow-xl">
+                        Envoyer ma demande
+                    </button>
+                </form>
+            </div>
+            
+            <div data-aos="fade-left" data-aos-delay="200">
+                <h3 class="text-3xl font-extrabold mb-8 tracking-tight dark:text-white">Nous Trouver</h3>
+                
+                <div class="aspect-[16/10] bg-zinc-200 dark:bg-slate-700 rounded-3xl overflow-hidden mb-10 shadow-inner border-4 border-white dark:border-slate-800 transition-colors text-center">
+                    <iframe class="w-full h-full grayscale dark:invert dark:hue-rotate-180" src="https://maps.google.com/maps?q=Morocco&t=&z=13&ie=UTF8&iwloc=&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-8 border-t border-zinc-100 dark:border-slate-700 pt-8 transition-colors">
+                    <div class="flex gap-4">
+                        <i class="fas fa-map-marker-alt text-xl text-indigo-500 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-900 dark:text-white">Siège Social</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">Branche Principale, Maroc</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <i class="fas fa-phone text-xl text-indigo-500 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-900 dark:text-white">Support Téléphonique</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm">+212 500-000000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="claim" class="py-28 bg-slate-950 relative overflow-hidden border-t border-slate-900">
+        <div class="absolute inset-0 bg-indigo-950/20 blur-[100px] rounded-full scale-110"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10" data-aos="zoom-in" data-aos-duration="1200">
+            <span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 text-xs font-black tracking-widest uppercase">
+                Offre Spéciale Développeur
+            </span>
+            <h2 class="text-white text-4xl md:text-5xl font-extrabold mb-10 leading-[1] tracking-tighter">Redéfinissez la Réputation en ligne de <span class="gradient-text">BARISTY</span></h2>
+            <p class="text-slate-400 text-xl mb-12 leading-relaxed max-w-3xl mx-auto">
+                Bonjour ! Je suis spécialiste en développement web. J'ai remarqué votre excellente note sur Google Maps, mais vous n'aviez pas encore de site moderne. J'ai créé ce prototype pour vous. Il est optimisé pour mobile, ultra-rapide et conçu pour convertir vos visiteurs en clients. Discutons-en.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://wa.me/212600000000?text=J'ai vu le prototype pour BARISTY. Parlons-en !" class="bg-emerald-500 text-white px-12 py-5 rounded-full font-bold text-xl flex items-center gap-4 hover:bg-emerald-600 transition shadow-2xl shadow-emerald-500/20 hover:scale-105 active:scale-95 duration-300">
+                    <i class="fab fa-whatsapp text-3xl"></i> Contactez-moi sur WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-500 py-10 text-center border-t border-slate-900">
+        <p class="heading-font font-bold text-slate-200 mb-2">BARISTY</p>
+        <p class="text-xs">© 2026. Ce site est un prototype conceptuel dynamique créé à des fins de démonstration.</p>
+    </footer>
+
+    <script>
+        AOS.init({ once: true, duration: 800 });
+    </script>
+</body>
+</html>
