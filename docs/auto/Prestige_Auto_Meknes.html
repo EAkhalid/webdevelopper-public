@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concessionnaire de Prestige | Prestige Auto Meknes</title>
+    
+    <!-- Polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            dark: '#0a0a0a',
+                            navy: '#111827',
+                            anthracite: '#1F2937',
+                            gold: '#D4AF37',
+                            champagne: '#F7E7CE'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    letterSpacing: {
+                        tightest: '-0.03em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .glass-panel-dark {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .premium-hover { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dark .premium-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+        .premium-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .img-container { overflow: hidden; }
+        .img-container img { transition: transform 1.2s ease; }
+        .img-container:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-[#F7E7CE] antialiased font-sans selection:bg-luxury-gold selection:text-black transition-colors duration-500">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel-light dark:glass-panel-dark py-4 transition-all duration-500" data-aos="fade-down" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="text-black dark:text-luxury-gold font-serif text-xl md:text-2xl font-bold tracking-widest uppercase transition-colors duration-500">
+                Prestige Auto Meknes
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm tracking-wide items-center">
+                <a href="#showroom" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Showroom</a>
+                <a href="#about" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Notre Expertise</a>
+                <a href="#temoignages" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Avis Clients</a>
+                <a href="#contact" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Contact</a>
+                
+                <!-- Bouton Toggle Dark/Light Mode -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-transparent dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none" aria-label="Changer le thème">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-luxury-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center img-container">
+        <!-- Fond d'écran (Réutilise l'image de la voiture) -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./img/bg-1.jpg');" data-aos="zoom-out" data-aos-duration="2000"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent dark:from-luxury-dark dark:via-black/60 dark:to-black/40 transition-colors duration-500"></div>
+        
+        <div class="relative z-10 text-center max-w-4xl px-6 mt-20" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+            <p class="text-luxury-gold text-sm tracking-[0.3em] uppercase mb-4 font-bold">Achat • Vente • Reprise</p>
+            <h1 class="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight tracking-tightest">
+                L'Excellence Automobile avec <span class="italic text-luxury-gold">Prestige Auto Meknes</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light max-w-2xl mx-auto drop-shadow-md">
+                Découvrez notre sélection rigoureuse de véhicules de prestige et de sport. Acquérez l'exceptionnel en toute sérénité.
+            </p>
+            <a href="#showroom" class="inline-block bg-luxury-gold text-black font-semibold px-10 py-4 rounded-sm hover:bg-[#b5952f] transition duration-500 shadow-[0_0_20px_rgba(212,175,55,0.3)] uppercase tracking-wider text-sm">
+                Visiter le Showroom
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION SHOWROOM (Filtres) -->
+    <section id="showroom" class="py-24 bg-gray-100 dark:bg-luxury-navy transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-4 tracking-tightest transition-colors duration-500">Nos Véhicules Disponibles</h2>
+                <div class="w-16 h-0.5 bg-luxury-gold mx-auto mb-10"></div>
+                
+                <!-- Menu des Filtres -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button class="filter-btn px-6 py-2 rounded-full border border-luxury-gold bg-luxury-gold text-black font-semibold transition-all duration-300 shadow-lg" data-filter="all">Tous</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="suv">SUV Premium</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="sport">Sport & Supercars</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="berline">Berlines</button>
+                </div>
+            </div>
+
+            <!-- Grille des véhicules -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="car-grid">
+                
+                <!-- Vehicule 1 : SUV -->
+                <div class="car-card suv bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-1.png" alt="SUV Premium" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-2xl font-serif text-gray-900 dark:text-white transition-colors duration-500">Range Rover Autobiography</h3>
+                        </div>
+                        <p class="text-luxury-gold font-bold text-xl mb-4">1 250 000 MAD</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Année 2023 • 15 000 km • V8 • Intérieur Cuir étendu</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Prestige Auto Meknes,%20je%20souhaite%20réserver%20un%20essai%20pour%20le%20Range%20Rover." class="text-gray-900 dark:text-white font-medium flex items-center hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">
+                            Réserver un essai <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vehicule 2 : SPORT -->
+                <div class="car-card sport bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-2.png" alt="Véhicule Sport" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Porsche 911 Carrera S</h3>
+                        <p class="text-luxury-gold font-bold text-xl mb-4">1 850 000 MAD</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Année 2024 • 5 000 km • 450ch • Pack Chrono</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Prestige Auto Meknes,%20je%20suis%20intéressé%20par%20l'achat%20de%20la%20Porsche." class="text-gray-900 dark:text-white font-medium flex items-center hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">
+                            Voir les détails <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vehicule 3 : BERLINE -->
+                <div class="car-card berline bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-3.png" alt="Berline Prestige" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Mercedes Classe S 580e</h3>
+                        <p class="text-luxury-gold font-bold text-xl mb-4">1 450 000 MAD</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Année 2022 • 28 000 km • Hybride Rechargeable</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Prestige Auto Meknes,%20je%20souhaite%20plus%20d'informations%20sur%20la%20Classe%20S." class="text-gray-900 dark:text-white font-medium flex items-center hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">
+                            Demander un financement <span class="ml-2">→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION ABOUT (Expertise) -->
+    <section id="about" class="py-24 bg-white dark:bg-luxury-dark relative overflow-hidden transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <div class="w-full md:w-1/2 img-container rounded-sm shadow-2xl" data-aos="fade-right" data-aos-duration="1200">
+                <img src="./img/about-img.jpg" alt="Showroom Prestige" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition duration-1000 border border-gray-200 dark:border-white/10">
+            </div>
+            
+            <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <h2 class="text-3xl md:text-4xl font-serif text-gray-900 dark:text-white mb-6 tracking-tightest transition-colors duration-500">L'Assurance d'un <span class="italic text-luxury-gold">Achat Serein</span></h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-500">Chez <strong class="text-gray-900 dark:text-white">Prestige Auto Meknes</strong>, nous sélectionnons méticuleusement chaque véhicule de notre parc. Historique limpide, carnet d'entretien à jour et vérification sur plus de 150 points de contrôle.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="300">
+                        <div class="bg-luxury-gold/10 p-3 rounded-full mr-4 flex-shrink-0">
+                            <!-- Icône Garantie -->
+                            <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-medium text-lg transition-colors duration-500">Garantie & Financement</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 transition-colors duration-500">Tous nos véhicules sont garantis 12 mois minimum. Solutions de crédit ou LOA sur-mesure.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
+                        <div class="bg-luxury-gold/10 p-3 rounded-full mr-4 flex-shrink-0">
+                            <!-- Icône Reprise -->
+                            <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-medium text-lg transition-colors duration-500">Reprise au meilleur prix</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 transition-colors duration-500">Nous rachetons votre ancien véhicule premium après estimation par nos experts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHIFFRES CLÉS (Statistiques animées) -->
+    <section id="statistiques" class="py-16 bg-gray-50 dark:bg-luxury-dark border-y border-gray-200 dark:border-white/5 transition-colors duration-500 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-4xl md:text-5xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="850">0</span>+</div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs transition-colors duration-500">Véhicules Vendus</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl md:text-5xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="150">0</span></div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs transition-colors duration-500">Points de contrôle</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl md:text-5xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="12">0</span></div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs transition-colors duration-500">Mois de Garantie (Min)</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl md:text-5xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="10">0</span></div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs transition-colors duration-500">Années d'Expertise</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTACT -->
+    <section id="contact" class="py-24 bg-white dark:bg-luxury-navy relative transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-down" data-aos-duration="1000">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-4 tracking-tightest transition-colors duration-500">Passez à l'action</h2>
+                <div class="w-16 h-0.5 bg-luxury-gold mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="w-full md:w-1/3 space-y-8" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="bg-gray-50 dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm h-full flex flex-col justify-center border border-gray-200 dark:border-none transition-colors duration-500">
+                        <h3 class="text-luxury-gold font-serif text-2xl mb-6">Notre Showroom</h3>
+                        <div class="space-y-4 text-gray-600 dark:text-gray-400 transition-colors duration-500">
+                            <p class="flex items-center"><span class="text-xl mr-3">📍</span> Quartier des Concessionnaires, Maroc</p>
+                            <p class="flex items-center"><span class="text-xl mr-3">📞</span> +212 6 XX XX XX XX</p>
+                            <p class="flex items-center"><span class="text-xl mr-3">✉️</span> vente@prestigeautomeknes.ma</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-2/3 bg-gray-50 dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm border border-gray-200 dark:border-none transition-colors duration-500" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Nom complet</label>
+                                <input type="text" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Téléphone</label>
+                                <input type="text" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Objet de votre demande</label>
+                            <select class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300">
+                                <option>Achat d'un véhicule du stock</option>
+                                <option>Recherche personnalisée</option>
+                                <option>Estimation de reprise</option>
+                                <option>Demande d'essai sur route</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Message (Modèle souhaité, budget...)</label>
+                            <textarea rows="4" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300"></textarea>
+                        </div>
+                        <button type="button" class="bg-luxury-gold text-black font-semibold px-8 py-3 rounded-sm hover:bg-[#b5952f] transition duration-300 w-full md:w-auto shadow-md">
+                            Envoyer la demande
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800 dark:border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif text-luxury-gold tracking-widest uppercase mb-4">Prestige Auto Meknes</h2>
+            <p class="text-sm text-gray-400 dark:text-gray-500 mb-8 transition-colors duration-500">Concessionnaire Automobile Premium.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-700 transition-colors duration-500">© 2026 Prestige Auto Meknes. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY WHATSAPP BUTTON -->
+    <a href="https://wa.me/212600000000?text=Bonjour%20Prestige Auto Meknes,%20je%20souhaite%20vous%20contacter%20pour%20l'achat%20d'un%20véhicule." target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center group" aria-label="Contactez-nous sur WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        <span class="absolute right-16 bg-black text-white text-sm py-2 px-4 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            Prendre RDV
+        </span>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialisation AOS
+        AOS.init({ once: true, offset: 50 });
+
+        // Script Dark/Light Mode
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        });
+
+        // Script de Filtrage de la Flotte
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const carCards = document.querySelectorAll('.car-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-luxury-gold', 'text-black', 'shadow-lg');
+                    b.classList.add('text-gray-700', 'dark:text-gray-300', 'bg-transparent');
+                });
+                
+                btn.classList.remove('text-gray-700', 'dark:text-gray-300', 'bg-transparent');
+                btn.classList.add('bg-luxury-gold', 'text-black', 'shadow-lg');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                carCards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    
+                    setTimeout(() => {
+                        if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                            card.style.display = 'block';
+                            setTimeout(() => { 
+                                card.style.opacity = '1'; 
+                                card.style.transform = 'scale(1)'; 
+                            }, 50);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }, 300);
+                });
+            });
+        });
+
+        // Script d'Animation des Compteurs
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; 
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const statSection = document.getElementById('statistiques');
+        if (statSection) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                const [entry] = entries;
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(statSection); 
+                }
+            }, { root: null, threshold: 0.5 });
+            observer.observe(statSection);
+        }
+    </script>
+</body>
+</html>
