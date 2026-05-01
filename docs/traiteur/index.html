@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traiteur de Prestige | {{ business_name }}</title>
+    
+    <!-- Polices Google : Playfair (Élégance classique) & Inter (Lisibilité moderne) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        event: {
+                            dark: '#121212',       /* Noir très profond */
+                            navy: '#1f1f1f',       /* Gris anthracite (cartes dark) */
+                            champagne: '#C5A059',  /* Or / Champagne chic */
+                            light: '#FAFAF9',      /* Blanc chaud / Ivoire */
+                            card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    letterSpacing: {
+                        widest: '0.25em'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        
+        /* Glassmorphism Navigation */
+        .glass-nav-light {
+            background: rgba(250, 250, 249, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+        .dark .glass-nav-dark {
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        /* Hover des cartes de service (Zoom très lent) */
+        .service-card { overflow: hidden; }
+        .service-card img { transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .service-card:hover img { transform: scale(1.08); }
+        
+        /* Ligne décorative animée */
+        .deco-line {
+            width: 0;
+            height: 1px;
+            background-color: #C5A059;
+            transition: width 0.8s ease;
+        }
+        .group:hover .deco-line { width: 100%; }
+    </style>
+</head>
+<body class="bg-event-light dark:bg-event-dark text-gray-800 dark:text-gray-200 antialiased font-sans selection:bg-event-champagne selection:text-white transition-colors duration-500">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 glass-nav-light dark:glass-nav-dark py-5 transition-all duration-500" data-aos="fade-down" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="text-gray-900 dark:text-event-champagne font-serif text-2xl font-bold tracking-widest uppercase transition-colors duration-500">
+                {{ business_name }}
+            </div>
+            
+            <div class="hidden md:flex space-x-10 text-sm font-medium tracking-widest uppercase items-center">
+                <a href="#savoir-faire" class="text-gray-600 dark:text-gray-300 hover:text-event-champagne dark:hover:text-event-champagne transition duration-300">Savoir-Faire</a>
+                <a href="#receptions" class="text-gray-600 dark:text-gray-300 hover:text-event-champagne dark:hover:text-event-champagne transition duration-300">Réceptions</a>
+                <a href="#livre-dor" class="text-gray-600 dark:text-gray-300 hover:text-event-champagne dark:hover:text-event-champagne transition duration-300">Livre d'Or</a>
+                
+                <!-- Toggle Dark/Light Mode -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-300 focus:outline-none">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-gray-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-event-champagne" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+
+                <!-- Bouton Devis -->
+                <a href="#contact" class="border border-event-champagne text-event-champagne px-6 py-2 hover:bg-event-champagne hover:text-white transition duration-500 shadow-sm">
+                    Demander un Devis
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Image de fond (bg-slide-01.jpg) -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./img/bg-slide-01.jpg');" data-aos="scale-in" data-aos-duration="4000"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-event-dark via-black/40 to-transparent"></div>
+        <div class="absolute inset-0 bg-black/30 dark:bg-black/50"></div>
+        
+        <div class="relative z-10 w-full max-w-5xl px-6 text-center mt-20" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200">
+            <p class="text-event-champagne text-sm tracking-widest uppercase mb-6 font-medium">Créateurs d'Émotions Culinaires</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight drop-shadow-lg">
+                L'Art de <span class="italic font-light">Recevoir</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-12 font-light max-w-3xl mx-auto drop-shadow-md">
+                Des mariages somptueux aux galas d'entreprise, <span class="font-medium text-white">{{ business_name }}</span> signe des réceptions inoubliables où l'élégance sublime la gastronomie.
+            </p>
+            <a href="https://wa.me/212600000000?text=Bonjour%20{{ business_name }},%20je%20souhaite%20organiser%20une%20réception." class="inline-block bg-event-champagne text-white font-medium px-10 py-4 uppercase tracking-widest hover:bg-[#a88645] transition duration-500 shadow-[0_0_20px_rgba(197,160,89,0.3)]">
+                Organiser votre événement
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION SAVOIR-FAIRE (About) -->
+    <section id="savoir-faire" class="py-24 bg-white dark:bg-event-navy transition-colors duration-500 relative">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+            
+            <div class="w-full lg:w-1/2 flex gap-4" data-aos="fade-right" data-aos-duration="1200">
+                <!-- Composition de 2 images (img13.jpg et img14.jpg) -->
+                <div class="w-1/2 mt-12">
+                    <img src="./img/img13.jpg" alt="Détail culinaire" class="w-full h-80 object-cover rounded-sm shadow-xl">
+                </div>
+                <div class="w-1/2">
+                    <img src="./img/img14.jpg" alt="Mise en place" class="w-full h-[26rem] object-cover rounded-sm shadow-2xl">
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-1/2" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-px bg-event-champagne mr-4"></div>
+                    <p class="text-event-champagne text-sm tracking-widest uppercase font-semibold">Notre Signature</p>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif text-gray-900 dark:text-white mb-8 transition-colors duration-500">
+                    L'Excellence du <br><span class="italic text-gray-500 dark:text-gray-400">Sur-Mesure</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6 font-light leading-relaxed text-lg transition-colors duration-500">
+                    Chaque événement est une pièce unique. Notre brigade de chefs talentueux imagine pour vous des menus audacieux, mêlant subtilement la richesse du terroir à la finesse de la haute gastronomie contemporaine.
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 mb-10 font-light leading-relaxed text-lg transition-colors duration-500">
+                    Du choix de la porcelaine à l'art du dressage, nous orchestrons votre réception avec une précision d'orfèvre et un service irréprochable.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-8 border-t border-gray-100 dark:border-gray-800 pt-8">
+                    <div>
+                        <h4 class="text-gray-900 dark:text-white font-serif text-xl mb-2">Gastronomie</h4>
+                        <p class="text-sm text-gray-500">Produits nobles et de saison</p>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-900 dark:text-white font-serif text-xl mb-2">Scénographie</h4>
+                        <p class="text-sm text-gray-500">Arts de la table raffinés</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION RÉCEPTIONS (Portfolio Services) -->
+    <section id="receptions" class="py-24 bg-event-light dark:bg-event-dark transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <p class="text-event-champagne text-sm tracking-widest uppercase mb-4 font-semibold">Nos Prestations</p>
+                <h2 class="text-4xl md:text-5xl font-serif text-gray-900 dark:text-white transition-colors duration-500">Scénarios <span class="italic text-gray-500">Prestigieux</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Mariages (img15.jpg) -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card relative h-[450px] rounded-sm shadow-lg mb-6">
+                        <img src="./img/img15.jpg" alt="Mariages d'Exception" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-event-dark/90 via-event-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <h3 class="text-2xl font-serif text-white mb-2">Mariages d'Exception</h3>
+                            <div class="deco-line"></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 font-light px-2">Sublimez le plus beau jour de votre vie avec un dîner féerique, des ateliers culinaires animés et une pièce montée spectaculaire.</p>
+                </div>
+
+                <!-- Gala Corporate (img16.jpg) -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card relative h-[450px] rounded-sm shadow-lg mb-6">
+                        <img src="./img/img16.jpg" alt="Cocktails & Galas" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-event-dark/90 via-event-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <h3 class="text-2xl font-serif text-white mb-2">Dîners de Gala</h3>
+                            <div class="deco-line"></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 font-light px-2">Impressionnez vos partenaires avec des réceptions d'entreprise haut de gamme, buffets signatures et cocktails dînatoires raffinés.</p>
+                </div>
+
+                <!-- Événements Privés (img17.jpg) -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card relative h-[450px] rounded-sm shadow-lg mb-6">
+                        <img src="./img/img17.jpg" alt="Événements Privés" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-event-dark/90 via-event-dark/20 to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <h3 class="text-2xl font-serif text-white mb-2">Réceptions Privées</h3>
+                            <div class="deco-line"></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 font-light px-2">Anniversaires prestigieux, baptêmes ou dîners intimistes. Un chef privé et un maître d'hôtel dédiés pour vous et vos invités.</p>
+                </div>
+            </div>
+            
+            <!-- Galerie additionnelle rapide (img18, img19, img20) -->
+            <div class="grid grid-cols-3 gap-4 mt-8" data-aos="fade-up" data-aos-delay="400">
+                <div class="h-48 overflow-hidden rounded-sm"><img src="./img/img18.jpg" class="w-full h-full object-cover hover:scale-110 transition duration-700"></div>
+                <div class="h-48 overflow-hidden rounded-sm"><img src="./img/img19.jpg" class="w-full h-full object-cover hover:scale-110 transition duration-700"></div>
+                <div class="h-48 overflow-hidden rounded-sm"><img src="./img/img20.jpg" class="w-full h-full object-cover hover:scale-110 transition duration-700"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION COMPTEURS -->
+    <section id="statistiques" class="py-16 bg-event-champagne relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-4xl md:text-5xl font-serif text-white font-bold mb-2"><span class="counter" data-target="20">0</span></div>
+                    <div class="text-event-dark font-semibold tracking-widest uppercase text-xs">Années de Passion</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl md:text-5xl font-serif text-white font-bold mb-2"><span class="counter" data-target="850">0</span>+</div>
+                    <div class="text-event-dark font-semibold tracking-widest uppercase text-xs">Mariages Célébrés</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl md:text-5xl font-serif text-white font-bold mb-2"><span class="counter" data-target="15000">0</span></div>
+                    <div class="text-event-dark font-semibold tracking-widest uppercase text-xs">Convives Ravis</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl md:text-5xl font-serif text-white font-bold mb-2"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="text-event-dark font-semibold tracking-widest uppercase text-xs">Création Maison</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION ÉQUIPE (Team) -->
+    <section class="py-24 bg-white dark:bg-event-navy transition-colors duration-500 border-b border-gray-100 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white transition-colors duration-500">Les Artisans du <span class="italic text-event-champagne">Goût</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Membre 1 (team1.jpg) -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <img src="./img/team1.jpg" alt="Chef de Cuisine" class="w-48 h-48 mx-auto rounded-full object-cover mb-6 border-4 border-gray-50 dark:border-event-dark shadow-lg filter grayscale hover:grayscale-0 transition duration-500">
+                    <h3 class="text-xl font-serif text-gray-900 dark:text-white mb-1">Jean-Baptiste M.</h3>
+                    <p class="text-event-champagne text-sm uppercase tracking-widest">Chef Exécutif</p>
+                </div>
+                <!-- Membre 2 (team2.jpg) -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <img src="./img/team2.jpg" alt="Chef Pâtissier" class="w-48 h-48 mx-auto rounded-full object-cover mb-6 border-4 border-gray-50 dark:border-event-dark shadow-lg filter grayscale hover:grayscale-0 transition duration-500">
+                    <h3 class="text-xl font-serif text-gray-900 dark:text-white mb-1">Claire L.</h3>
+                    <p class="text-event-champagne text-sm uppercase tracking-widest">Chef Pâtissière</p>
+                </div>
+                <!-- Membre 3 (team3.jpg) -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <img src="./img/team3.jpg" alt="Maître d'Hôtel" class="w-48 h-48 mx-auto rounded-full object-cover mb-6 border-4 border-gray-50 dark:border-event-dark shadow-lg filter grayscale hover:grayscale-0 transition duration-500">
+                    <h3 class="text-xl font-serif text-gray-900 dark:text-white mb-1">Youssef T.</h3>
+                    <p class="text-event-champagne text-sm uppercase tracking-widest">Premier Maître d'Hôtel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION TÉMOIGNAGES (Livre d'Or) -->
+    <section id="livre-dor" class="py-24 bg-event-light dark:bg-event-dark transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <!-- Image Témoignage (testimonial.jpg) -->
+                <div class="w-full md:w-1/3" data-aos="fade-right">
+                    <img src="./img/testimonial.jpg" alt="Réception Mariage" class="w-full h-auto object-cover rounded-sm shadow-2xl">
+                </div>
+                
+                <!-- Citations -->
+                <div class="w-full md:w-2/3" data-aos="fade-left">
+                    <p class="text-event-champagne text-sm tracking-widest uppercase mb-4 font-semibold">Livre d'Or</p>
+                    <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-10 transition-colors duration-500">Mots Précieux</h2>
+                    
+                    <div class="space-y-8">
+                        <div class="bg-white dark:bg-event-navy p-8 border border-gray-100 dark:border-transparent rounded-sm shadow-sm relative">
+                            <div class="text-event-champagne text-6xl font-serif absolute top-4 right-6 opacity-20">"</div>
+                            <p class="text-gray-600 dark:text-gray-300 italic mb-4 font-light">"Une prestation hors normes pour notre mariage. Le cocktail était d'une finesse incroyable et le service d'une élégance absolue. Nos invités nous en parlent encore. Merci {{ business_name }} !"</p>
+                            <div class="flex items-center">
+                                <img src="./img/testimonial2.jpg" alt="Mariés" class="w-10 h-10 rounded-full object-cover mr-3 grayscale">
+                                <span class="font-medium text-gray-900 dark:text-white">Élodie & Karim</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-event-navy p-8 border border-gray-100 dark:border-transparent rounded-sm shadow-sm relative">
+                            <div class="text-event-champagne text-6xl font-serif absolute top-4 right-6 opacity-20">"</div>
+                            <p class="text-gray-600 dark:text-gray-300 italic mb-4 font-light">"Partenaire de choix pour nos galas annuels. Rigueur, créativité et discrétion. Une maîtrise parfaite de l'événementiel de luxe."</p>
+                            <div class="flex items-center">
+                                <img src="./img/testimonial3.jpg" alt="Corporate" class="w-10 h-10 rounded-full object-cover mr-3 grayscale">
+                                <span class="font-medium text-gray-900 dark:text-white">Groupe Financier International</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTACT (Parallax CTA) -->
+    <section id="contact" class="relative py-32 overflow-hidden bg-event-dark">
+        <!-- Parallax Background (parallax.jpg) -->
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed opacity-40" style="background-image: url('./img/parallax.jpg');"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">Écrivons l'histoire de votre <span class="italic text-event-champagne">Réception</span></h2>
+            <p class="text-gray-300 mb-10 font-light text-lg">Confiez-nous vos envies. Notre équipe commerciale se tient à votre disposition pour élaborer une proposition sur-mesure.</p>
+            
+            <form class="bg-white/10 backdrop-blur-md p-8 md:p-10 rounded-sm border border-white/20 text-left max-w-2xl mx-auto shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-white text-sm mb-2 font-light">Nom / Entreprise</label>
+                        <input type="text" class="w-full bg-black/50 border border-gray-600 text-white p-3 focus:border-event-champagne outline-none transition">
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-2 font-light">Téléphone</label>
+                        <input type="text" class="w-full bg-black/50 border border-gray-600 text-white p-3 focus:border-event-champagne outline-none transition">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-white text-sm mb-2 font-light">Type d'événement</label>
+                        <select class="w-full bg-black/50 border border-gray-600 text-white p-3 focus:border-event-champagne outline-none transition">
+                            <option>Mariage</option>
+                            <option>Dîner de Gala</option>
+                            <option>Cocktail d'Entreprise</option>
+                            <option>Événement Privé</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-2 font-light">Nombre de convives (est.)</label>
+                        <input type="number" class="w-full bg-black/50 border border-gray-600 text-white p-3 focus:border-event-champagne outline-none transition">
+                    </div>
+                </div>
+                <button type="button" class="w-full bg-event-champagne text-white font-medium py-4 uppercase tracking-widest hover:bg-[#a88645] transition duration-300 shadow-lg">
+                    Demander un devis
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- META CTA : CALL TO ACTION "GET THIS WEBSITE" -->
+    <section class="py-16 bg-gradient-to-r from-[#D4AF37] to-[#A67C00] text-center">
+        <div class="max-w-4xl mx-auto px-6" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-serif text-black mb-4 font-bold">Un Traiteur d'Exception mérite un Site d'Exception.</h2>
+            <p class="text-black/80 text-lg mb-8 font-medium">
+                Vous êtes traiteur de luxe ? Ce design ultra-premium est prêt à accueillir votre marque. Gérez vos devis et réservations directement via WhatsApp.
+            </p>
+            <a href="https://wa.me/212XXXXXXXXX?text=Salam,%20je%20suis%20intéressé%20par%20le%20site%20Traiteur%20Luxe" class="inline-block bg-black text-[#D4AF37] font-bold px-10 py-4 hover:bg-gray-900 transition-all duration-300 shadow-2xl uppercase tracking-wider text-sm">
+                Obtenir ce site clé en main
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-event-dark py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif text-event-champagne tracking-widest uppercase mb-4">{{ business_name }}</h2>
+            <p class="text-sm text-gray-400 mb-8 font-light">L'Art de Recevoir - Traiteur & Organisateur de Réceptions.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <!-- Utilisation des icones réseaux sociaux de ton dossier -->
+                <a href="#" class="opacity-50 hover:opacity-100 transition"><img src="./img/facebook.png" alt="Facebook" class="w-6 h-6 invert"></a>
+                <a href="#" class="opacity-50 hover:opacity-100 transition"><img src="./img/twitter.png" alt="Twitter" class="w-6 h-6 invert"></a>
+                <a href="#" class="opacity-50 hover:opacity-100 transition"><img src="./img/linkedin.png" alt="LinkedIn" class="w-6 h-6 invert"></a>
+            </div>
+            <p class="text-xs text-gray-600">© 2026 {{ business_name }}. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY WHATSAPP BUTTON -->
+    <a href="https://wa.me/212600000000?text=Bonjour%20{{ business_name }},%20je%20souhaite%20vous%20contacter." target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center group">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        <span class="absolute right-16 bg-[#121212] text-white text-sm py-2 px-4 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none border border-[#C5A059]/30">
+            Demander un devis
+        </span>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50 });
+
+        // Script pour le Toggle Dark/Light Mode
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        });
+
+        // Script Compteurs
+        const counters = document.querySelectorAll('.counter');
+        const speed = 150; 
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20); 
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const statSection = document.getElementById('statistiques');
+        if (statSection) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                const [entry] = entries;
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(statSection); 
+                }
+            }, { root: null, threshold: 0.5 });
+            observer.observe(statSection);
+        }
+    </script>
+</body>
+</html>
