@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!-- Le mode sombre est activé par défaut via la classe 'dark' sur la balise html -->
+<html lang="fr" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location de Prestige | Location de voiture</title>
+    
+    <!-- Polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', /* Activation du dark mode via une classe CSS */
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            dark: '#0a0a0a',
+                            navy: '#111827',
+                            anthracite: '#1F2937',
+                            gold: '#D4AF37',
+                            champagne: '#F7E7CE'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    letterSpacing: {
+                        tightest: '-0.03em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Styles globaux avec transition fluide pour le changement de thème */
+        body { 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        .glass-panel-dark {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        glass-panel-light
+
+        .premium-hover { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .dark .premium-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+        .premium-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .img-container { overflow: hidden; }
+        .img-container img { transition: transform 1.2s ease; }
+        .img-container:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-[#F7E7CE] antialiased font-sans selection:bg-luxury-gold selection:text-black transition-colors duration-500">
+
+    <!-- Navigation -->
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel-light dark:glass-panel-dark py-4 transition-all duration-500" data-aos="fade-down" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <!-- Logo (Noir en light, Or en dark) -->
+            <div class="text-black dark:text-luxury-gold font-serif text-xl md:text-2xl font-bold tracking-widest uppercase transition-colors duration-500">
+                Location de voiture
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-sm tracking-wide items-center">
+                <!-- Liens (Noir gras en light, Gris clair en dark) -->
+                <a href="#flotte" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Notre Flotte</a>
+                <a href="#about" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">L'Expérience</a>
+                <a href="#temoignages" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Témoignages</a>
+                <a href="#contact" class="font-semibold text-black dark:text-gray-200 dark:font-medium hover:text-luxury-gold dark:hover:text-luxury-gold transition duration-300">Contact</a>
+                
+                <!-- Bouton Toggle Dark/Light Mode -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-transparent dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none" aria-label="Changer le thème">
+                    <!-- Icône Lune (affichée en mode clair) -->
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <!-- Icône Soleil (affichée en mode sombre) -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-luxury-gold" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center img-container">
+        <!-- L'image de fond reste sombre pour le contraste avec le texte blanc -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('./img/bg-1.jpg');" data-aos="zoom-out" data-aos-duration="2000"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent dark:from-luxury-dark dark:via-black/60 dark:to-black/40 transition-colors duration-500"></div>
+        
+        <div class="relative z-10 text-center max-w-4xl px-6 mt-20" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+            <p class="text-luxury-gold text-sm tracking-[0.3em] uppercase mb-4 font-bold">Service VIP & Discrétion Absolue</p>
+            <h1 class="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight tracking-tightest">
+                L'Excellence au volant avec <span class="italic text-luxury-gold">Location de voiture</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light max-w-2xl mx-auto drop-shadow-md">
+                Vivez l'expérience de la conduite de prestige. Une flotte exclusive pour vos déplacements professionnels ou vos moments d'exception.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION FLOTTE -->
+    <!-- SECTION FLOTTE AVEC FILTRES -->
+    <section id="flotte" class="py-24 bg-gray-100 dark:bg-luxury-navy transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-4 tracking-tightest transition-colors duration-500">Notre Flotte d'Exception</h2>
+                <div class="w-16 h-0.5 bg-luxury-gold mx-auto mb-10"></div>
+                
+                <!-- Menu des Filtres -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button class="filter-btn px-6 py-2 rounded-full border border-luxury-gold bg-luxury-gold text-black font-semibold transition-all duration-300 shadow-lg" data-filter="all">Tous</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="suv">SUV Premium</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="sport">Sport</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="berline">Berlines</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-luxury-gold dark:hover:border-luxury-gold font-medium transition-all duration-300" data-filter="citadine">Citadines VIP</button>
+                </div>
+            </div>
+
+            <!-- Grille des véhicules -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="car-grid">
+                
+                <!-- Vehicule 1 : SUV -->
+                <div class="car-card suv bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-1.png" alt="SUV Premium" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Range Rover Autobiography</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Automatique  V8  Intérieur Cuir</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Location de voiture,%20je%20souhaite%20réserver%20le%20Range%20Rover." class="text-luxury-gold font-medium flex items-center hover:text-black dark:hover:text-white transition duration-300">
+                            Louer ce modèle <span class="ml-2">?</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vehicule 2 : SPORT -->
+                <div class="car-card sport bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-2.png" alt="Véhicule Sport" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Porsche 911 Carrera</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Automatique  500ch  Carbone</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Location de voiture,%20je%20souhaite%20réserver%20la%20Porsche." class="text-luxury-gold font-medium flex items-center hover:text-black dark:hover:text-white transition duration-300">
+                            Louer ce modèle <span class="ml-2">?</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vehicule 3 : BERLINE -->
+                <div class="car-card berline bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <img src="./img/car-3.png" alt="Berline Prestige" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Mercedes Classe S</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Automatique  Hybride  Chauffeur optionnel</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Location de voiture,%20je%20souhaite%20réserver%20la%20Classe%20S." class="text-luxury-gold font-medium flex items-center hover:text-black dark:hover:text-white transition duration-300">
+                            Louer ce modèle <span class="ml-2">?</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vehicule 4 : CITADINE -->
+                <div class="car-card citadine bg-white dark:bg-luxury-anthracite rounded-sm overflow-hidden premium-hover relative group border border-gray-200 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="h-64 bg-gray-50 dark:bg-white/5 flex items-center justify-center p-6 img-container transition-colors duration-500">
+                        <!-- Utilisation de ton image car-4.png -->
+                        <img src="./img/car-4.png" alt="Citadine VIP" class="object-contain w-full h-full drop-shadow-2xl">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-serif text-gray-900 dark:text-white mb-2 transition-colors duration-500">Mini Cooper S Premium</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 transition-colors duration-500">Automatique  Citadine Sport  Toit Panoramique</p>
+                        <a href="https://wa.me/212600000000?text=Bonjour%20Location de voiture,%20je%20souhaite%20réserver%20la%20Mini." class="text-luxury-gold font-medium flex items-center hover:text-black dark:hover:text-white transition duration-300">
+                            Louer ce modèle <span class="ml-2">?</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- SECTION ABOUT -->
+    <section id="about" class="py-24 bg-white dark:bg-luxury-dark relative overflow-hidden transition-colors duration-500">
+        <div class="absolute inset-0 opacity-0 dark:opacity-[0.03] pointer-events-none transition-opacity duration-500" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <div class="w-full md:w-1/2 img-container rounded-sm shadow-2xl" data-aos="fade-right" data-aos-duration="1200">
+                <img src="./img/about-img.jpg" alt="Service Prestige" class="w-full h-auto object-cover grayscale hover:grayscale-0 transition duration-1000 border border-gray-200 dark:border-white/10">
+            </div>
+            
+            <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <h2 class="text-3xl md:text-4xl font-serif text-gray-900 dark:text-white mb-6 tracking-tightest transition-colors duration-500">Pourquoi choisir <span class="italic text-luxury-gold">Location de voiture</span> ?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-8 transition-colors duration-500">Nous ne louons pas seulement des voitures, nous délivrons une promesse d'excellence. Chaque véhicule est méticuleusement préparé pour répondre aux standards des clients les plus exigeants.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="300">
+                        <div class="bg-luxury-gold/10 p-3 rounded-full mr-4 flex-shrink-0">
+                            <!-- Icône modifiée pour être visible en mode clair et sombre -->
+                            <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-medium text-lg transition-colors duration-500">Assistance 24/7</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 transition-colors duration-500">Un concierge dédié à votre disposition de jour comme de nuit.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start" data-aos="fade-up" data-aos-delay="400">
+                        <div class="bg-luxury-gold/10 p-3 rounded-full mr-4 flex-shrink-0">
+                            <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-medium text-lg transition-colors duration-500">Service VIP & Discrétion</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 transition-colors duration-500">Livraison à l'aéroport ou à votre hôtel dans la plus grande confidentialité.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- SECTION CHIFFRES CLÉS (Statistiques animées) -->
+    <section id="statistiques" class="py-20 bg-gray-50 dark:bg-luxury-dark border-y border-gray-200 dark:border-white/5 transition-colors duration-500 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <!-- Compteur 1 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="0">
+                    <div class="text-4xl md:text-6xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="1500">0</span>+</div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs md:text-sm transition-colors duration-500">Clients VIP Satisfaits</div>
+                </div>
+                
+                <!-- Compteur 2 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="text-4xl md:text-6xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="50">0</span>+</div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs md:text-sm transition-colors duration-500">Véhicules de Prestige</div>
+                </div>
+                
+                <!-- Compteur 3 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="text-4xl md:text-6xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs md:text-sm transition-colors duration-500">Service de Qualité</div>
+                </div>
+                
+                <!-- Compteur 4 -->
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="text-4xl md:text-6xl font-serif text-luxury-gold font-bold mb-2"><span class="counter" data-target="15">0</span></div>
+                    <div class="text-gray-900 dark:text-white font-medium tracking-widest uppercase text-xs md:text-sm transition-colors duration-500">Années d'Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION TEMOIGNAGES (RÉINTÉGRÉE) -->
+    <section id="temoignages" class="py-24 bg-gray-50 dark:bg-cover dark:bg-center relative transition-colors duration-500" style="background-image: url('./img/fact-bg.jpg');">
+        <!-- Overlay uniquement visible en mode sombre -->
+        <div class="absolute inset-0 dark:bg-luxury-dark/90 transition-colors duration-500"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-4 tracking-tightest transition-colors duration-500">La confiance de nos clients</h2>
+                <div class="w-16 h-0.5 bg-luxury-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Carte 1 -->
+                <div class="bg-white dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm shadow-lg dark:shadow-none border border-gray-100 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <div class="flex text-luxury-gold mb-4 text-lg">?????</div>
+                    <p class="italic text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-500">"Un service irréprochable. Le Range Rover a été livré directement à ma villa à l'heure précise. Un niveau de professionnalisme rare."</p>
+                    <div class="flex items-center">
+                        <img src="./img/testimonial-1.jpg" alt="Client VIP" class="w-12 h-12 rounded-full object-cover mr-4 grayscale border border-gray-200 dark:border-luxury-gold/30">
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-serif transition-colors duration-500">M. El Fassi</h4>
+                            <span class="text-xs text-luxury-gold font-medium">Client Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 2 -->
+                <div class="bg-white dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm shadow-lg dark:shadow-none border border-gray-100 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="flex text-luxury-gold mb-4 text-lg">?????</div>
+                    <p class="italic text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-500">"Pour mon mariage, je voulais la perfection. Location de voiture a dépassé toutes mes attentes avec un véhicule immaculé et un chauffeur discret."</p>
+                    <div class="flex items-center">
+                        <img src="./img/testimonial-2.jpg" alt="Client VIP" class="w-12 h-12 rounded-full object-cover mr-4 grayscale border border-gray-200 dark:border-luxury-gold/30">
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-serif transition-colors duration-500">Y. Bennani</h4>
+                            <span class="text-xs text-luxury-gold font-medium">Client Premium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte 3 -->
+                <div class="bg-white dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm shadow-lg dark:shadow-none border border-gray-100 dark:border-transparent transition-all duration-500" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="flex text-luxury-gold mb-4 text-lg">?????</div>
+                    <p class="italic text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-500">"Le seul loueur à qui je fais confiance pour mes déplacements d'affaires. Une flotte moderne et un état mécanique sans faille."</p>
+                    <div class="flex items-center">
+                        <img src="./img/testimonial-3.jpg" alt="Client VIP" class="w-12 h-12 rounded-full object-cover mr-4 grayscale border border-gray-200 dark:border-luxury-gold/30">
+                        <div>
+                            <h4 class="text-gray-900 dark:text-white font-serif transition-colors duration-500">Dr. Chraibi</h4>
+                            <span class="text-xs text-luxury-gold font-medium">Client Corporate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTACT -->
+    <section id="contact" class="py-24 bg-white dark:bg-luxury-navy relative border-t border-gray-100 dark:border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-down" data-aos-duration="1000">
+                <h2 class="text-4xl font-serif text-gray-900 dark:text-white mb-4 tracking-tightest transition-colors duration-500">Contactez-nous</h2>
+                <div class="w-16 h-0.5 bg-luxury-gold mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="w-full md:w-1/3 space-y-8" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="bg-gray-50 dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm h-full flex flex-col justify-center border border-gray-200 dark:border-none transition-colors duration-500">
+                        <h3 class="text-luxury-gold font-serif text-2xl mb-6">Notre Agence</h3>
+                        <div class="space-y-4 text-gray-600 dark:text-gray-400 transition-colors duration-500">
+                            <p class="flex items-center"><span class="text-xl mr-3">??</span> Showroom VIP, Centre Ville</p>
+                            <p class="flex items-center"><span class="text-xl mr-3">??</span> +212 6 XX XX XX XX</p>
+                            <p class="flex items-center"><span class="text-xl mr-3">??</span> contact@locationdevoiture.ma</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-2/3 bg-gray-50 dark:bg-transparent dark:glass-panel-dark p-8 rounded-sm border border-gray-200 dark:border-none transition-colors duration-500" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Nom complet</label>
+                                <input type="text" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300" placeholder="Votre nom">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Téléphone</label>
+                                <input type="text" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300" placeholder="+212 6...">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-700 dark:text-gray-400 mb-2 transition-colors duration-500">Modèle souhaité & Dates</label>
+                            <textarea rows="4" class="w-full bg-white dark:bg-black/40 border border-gray-300 dark:border-gray-700 rounded-sm p-3 text-gray-900 dark:text-white focus:border-luxury-gold dark:focus:border-luxury-gold focus:outline-none transition-colors duration-300" placeholder="Décrivez votre besoin..."></textarea>
+                        </div>
+                        <button type="button" class="bg-luxury-gold text-black font-semibold px-8 py-3 rounded-sm hover:bg-[#b5952f] transition duration-300 w-full md:w-auto shadow-md">
+                            Envoyer la demande
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- META CTA : CALL TO ACTION "GET THIS WEBSITE" -->
+    <section class="py-16 relative overflow-hidden bg-gradient-to-r from-luxury-gold to-yellow-600">
+        <div class="absolute inset-0 bg-black opacity-10" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center" data-aos="zoom-in" data-aos-duration="1000">
+            <h2 class="text-3xl md:text-5xl font-serif text-black mb-4 font-bold tracking-tightest">Ce design premium vous plaît ?</h2>
+            <p class="text-black/80 text-lg mb-8 font-medium max-w-2xl mx-auto">
+                Obtenez cette plateforme sur-mesure pour <span class="font-bold">Location de voiture</span>. 
+                Modernisez votre image de marque et recevez vos réservations directement sur WhatsApp.
+            </p>
+            <a href="https://wa.me/212XXXXXXXXX?text=Salam,%20je%20suis%20intéressé%20par%20la%20maquette%20du%20site%20pour%20Location de voiture" class="inline-block bg-black text-luxury-gold font-bold px-10 py-4 rounded-sm hover:bg-gray-900 transition-all duration-500 shadow-2xl premium-hover text-lg">
+                ?? Obtenir ce site web maintenant
+            </a>
+            <p class="text-black/60 text-sm mt-4 font-semibold">Livraison clé en main  Hébergement inclus</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800 dark:border-white/5 transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif text-luxury-gold tracking-widest uppercase mb-4">Location de voiture</h2>
+            <p class="text-sm text-gray-400 dark:text-gray-500 mb-8 transition-colors duration-500">L'excellence automobile à votre service.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-700 transition-colors duration-500">© 2026 Location de voiture. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY WHATSAPP BUTTON -->
+    <a href="https://wa.me/212600000000?text=Bonjour%20Location de voiture,%20je%20souhaite%20vous%20contacter." target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform duration-300 z-50 flex items-center justify-center group" aria-label="Contactez-nous sur WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        <span class="absolute right-16 bg-black text-white text-sm py-2 px-4 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            Commander maintenant
+        </span>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialisation AOS
+        AOS.init({ once: true, offset: 50 });
+
+        // Script pour le Toggle Dark/Light Mode
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Gérer l'affichage de l'icône au chargement
+        if (document.documentElement.classList.contains('dark')) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // Bascule de l'icône
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // Bascule du mode sur la balise <html>
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+   
+	// --- Script de Filtrage de la Flotte ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const carCards = document.querySelectorAll('.car-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. Réinitialiser le style de tous les boutons
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-luxury-gold', 'text-black', 'shadow-lg');
+                    b.classList.add('text-gray-700', 'dark:text-gray-300', 'bg-transparent');
+                });
+                
+                // 2. Mettre en surbrillance le bouton cliqué
+                btn.classList.remove('text-gray-700', 'dark:text-gray-300', 'bg-transparent');
+                btn.classList.add('bg-luxury-gold', 'text-black', 'shadow-lg');
+
+                // 3. Filtrer les cartes
+                const filterValue = btn.getAttribute('data-filter');
+
+                carCards.forEach(card => {
+                    // Animation de disparition douce
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    
+                    setTimeout(() => {
+                        if (filterValue === 'all' || card.classList.contains(filterValue)) {
+                            card.style.display = 'block';
+                            // Petit délai pour déclencher l'animation CSS d'apparition
+                            setTimeout(() => { 
+                                card.style.opacity = '1'; 
+                                card.style.transform = 'scale(1)'; 
+                            }, 50);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }, 300); // Temps de la transition CSS
+                });
+            });
+        }); 
+		
+		// --- Script d'Animation des Compteurs (Statistiques) ---
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // Contrôle la vitesse (plus le chiffre est bas, plus c'est rapide)
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    
+                    // Calcul de l'incrémentation
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        // Arrondir au chiffre supérieur et mettre à jour
+                        counter.innerText = Math.ceil(count + inc);
+                        // Appeler la fonction à nouveau toutes les 15ms
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Déclencher l'animation uniquement quand on scrolle sur la section
+        const statSection = document.getElementById('statistiques');
+        if (statSection) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                const [entry] = entries;
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(statSection); // On arrête d'observer pour ne jouer l'animation qu'une fois
+                }
+            }, {
+                root: null,
+                threshold: 0.5, // Se déclenche quand la moitié de la section est visible
+            });
+            observer.observe(statSection);
+        }
+		</script>
+</body>
+</html>
